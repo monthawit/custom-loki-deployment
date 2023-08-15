@@ -11,7 +11,6 @@ spec:
     whenScaled: Retain
   podManagementPolicy: OrderedReady
   replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: loki
@@ -20,10 +19,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 6902b877b72340bffc62fa7bf5935695632390783b723365ecf4d2a6f6787c35
         prometheus.io/port: http-metrics
         prometheus.io/scrape: "true"
-      creationTimestamp: null
       labels:
         app: loki
         name: loki
@@ -101,13 +98,3 @@ spec:
           claimName: cephfs-loki-pvc
   updateStrategy:
     type: RollingUpdate
-status:
-  availableReplicas: 1
-  collisionCount: 0
-  currentReplicas: 1
-  currentRevision: loki-6945c4ddb8
-  observedGeneration: 3
-  readyReplicas: 1
-  replicas: 1
-  updateRevision: loki-6945c4ddb8
-  updatedReplicas: 1
