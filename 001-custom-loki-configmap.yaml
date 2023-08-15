@@ -50,4 +50,5 @@ data:
       filesystem:
         directory: /data/loki/chunks
     table_manager:
-      retention_deletes_enabled: false
+      retention_deletes_enabled: true
+      retention_period: 2160h
