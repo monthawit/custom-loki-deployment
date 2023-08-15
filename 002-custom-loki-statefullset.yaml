@@ -1,21 +1,10 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  annotations:
-    meta.helm.sh/release-name: loki
-    meta.helm.sh/release-namespace: loki-stack
-  creationTimestamp: "2023-08-15T08:26:18Z"
-  generation: 3
   labels:
     app: loki
-    app.kubernetes.io/managed-by: Helm
-    chart: loki-2.16.0
-    heritage: Helm
-    release: loki
   name: loki
   namespace: loki-stack
-  resourceVersion: "9431933"
-  uid: 11623b51-4fbb-4cc5-bfc2-b6be477db16c
 spec:
   persistentVolumeClaimRetentionPolicy:
     whenDeleted: Retain
