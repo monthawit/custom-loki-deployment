@@ -1,0 +1,16 @@
+$ sudo cat <<EOF >/etc/systemd/system/loki.service
+[Unit] 
+Description=Loki service 
+After=network.target 
+ 
+[Service] 
+Type=simple 
+#User=loki 
+ExecStart=/opt/loki/loki-linux-amd64 -config.file /opt/loki/loki-local-config.yaml 
+Restart=always 
+ 
+[Install] 
+WantedBy=multi-user.target
+EOF
+$ sudo systemctl start loki.service
+$ sudo systemctl enable loki.service
