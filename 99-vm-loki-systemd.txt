@@ -1,3 +1,8 @@
+$ wget https://github.com/grafana/loki/releases/download/v2.2.1/loki-linux-amd64.zip
+$ sudo unzip loki-linux-amd64.zip
+
+
+
 $ sudo cat <<EOF >/etc/systemd/system/loki.service
 [Unit] 
 Description=Loki service 
