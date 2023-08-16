@@ -9,6 +9,92 @@ spec:
   - kubernetes
 ---
 apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: loki
+    release: loki
+  name: loki
+  namespace: loki-stack
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http-metrics
+    port: 3100
+    protocol: TCP
+    targetPort: http-metrics
+  selector:
+    app: loki
+    release: loki
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: loki
+    release: loki
+    variant: headless
+  name: loki-headless
+  namespace: loki-stack
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http-metrics
+    port: 3100
+    protocol: TCP
+    targetPort: http-metrics
+  selector:
+    app: loki
+    release: loki
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: loki
+    release: loki
+  name: loki-memberlist
+  namespace: loki-stack
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 7946
+    protocol: TCP
+    targetPort: memberlist-port
+  publishNotReadyAddresses: true
+  selector:
+    app: loki
+    release: loki
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
 kind: ConfigMap
 metadata:
   name: custom-promtail-configmap
