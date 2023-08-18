@@ -400,6 +400,14 @@ data:
       - job_name: kubernetes-pods
         pipeline_stages:
           - cri: {}
+          - match:
+              selector: '{app="eventrouter"}'
+              stages:
+              - json:
+                  expressions:
+                    namespace: event.metadata.namespace
+              - labels:
+                  namespace: "" 
         kubernetes_sd_configs:
           - role: pod
         relabel_configs:
